@@ -1,0 +1,41 @@
+digraph G {
+        node [shape=plaintext]
+        tabla [label=<
+            <table border="0" cellborder="1" cellspacing="0">
+                <tr><td colspan="2"> REPORTE DE MBR </td></tr>
+                <tr><td>mbr_tamano</td><td>13631488</td></tr>
+                <tr><td>mrb_fecha_creacion</td><td>2025-04-03 09:28</td></tr>
+                <tr><td>mbr_disk_signature</td><td>1120285961</td></tr>
+            
+                <tr><td colspan="2"> PARTICIÓN 1 </td></tr>
+                <tr><td>part_status</td><td>1</td></tr>
+                <tr><td>part_type</td><td>P</td></tr>
+                <tr><td>part_fit</td><td>W</td></tr>
+                <tr><td>part_start</td><td>153</td></tr>
+                <tr><td>part_size</td><td>4194304</td></tr>
+                <tr><td>part_name</td><td>Part31</td></tr>
+            
+                <tr><td colspan="2"> PARTICIÓN 2 </td></tr>
+                <tr><td>part_status</td><td>1</td></tr>
+                <tr><td>part_type</td><td>P</td></tr>
+                <tr><td>part_fit</td><td>W</td></tr>
+                <tr><td>part_start</td><td>4194457</td></tr>
+                <tr><td>part_size</td><td>4194304</td></tr>
+                <tr><td>part_name</td><td>Part32</td></tr>
+            
+                <tr><td colspan="2"> PARTICIÓN 3 </td></tr>
+                <tr><td>part_status</td><td>0</td></tr>
+                <tr><td>part_type</td><td>P</td></tr>
+                <tr><td>part_fit</td><td>W</td></tr>
+                <tr><td>part_start</td><td>8388761</td></tr>
+                <tr><td>part_size</td><td>1048576</td></tr>
+                <tr><td>part_name</td><td>Part33</td></tr>
+            
+                <tr><td colspan="2"> PARTICIÓN 4 </td></tr>
+                <tr><td>part_status</td><td>-</td></tr>
+                <tr><td>part_type</td><td>-</td></tr>
+                <tr><td>part_fit</td><td>-</td></tr>
+                <tr><td>part_start</td><td>-1</td></tr>
+                <tr><td>part_size</td><td>-</td></tr>
+                <tr><td>part_name</td><td>-</td></tr>
+            </table>>] }

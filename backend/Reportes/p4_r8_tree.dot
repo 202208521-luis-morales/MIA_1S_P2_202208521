@@ -1,0 +1,417 @@
+digraph G {
+        rankdir=TB;
+        node [shape=plaintext]
+    inode0 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 0</td></tr>
+            <tr><td>Nombre</td><td>/</td></tr>
+            <tr><td>Tipo</td><td>0</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3396953 3397337]</td></tr>
+        </table>>];
+    block3396953 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightgreen">
+                    <tr><td colspan="2">Bloque 3396953 (Carpeta)</td></tr>
+                    <tr><td>.</td><td>0</td></tr><tr><td>..</td><td>0</td></tr><tr><td>users.txt</td><td>1</td></tr><tr><td>bin</td><td>2</td></tr>
+                </table>>];
+            inode1 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 1</td></tr>
+            <tr><td>Nombre</td><td>users.txt</td></tr>
+            <tr><td>Tipo</td><td>1</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3397017 3397081 3397145]</td></tr>
+        </table>>];
+    block3397017 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3397017 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>1,G,root
+1,U,root,root,123
+2,G,usuarios
+3,G,adm
+0, G, mail
+5,G,n</td></tr>
+                </table>>];
+            block3397081 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3397081 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>ews
+6,G,sys
+2,U,usuario1,root,password
+3,U,user1,usuarios,abc
+0,</td></tr>
+                </table>>];
+            block3397145 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3397145 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>U,user2,adm,abc
+,abc</td></tr>
+                </table>>];
+            inode2 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 2</td></tr>
+            <tr><td>Nombre</td><td>bin</td></tr>
+            <tr><td>Tipo</td><td>0</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3397209]</td></tr>
+        </table>>];
+    block3397209 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightgreen">
+                    <tr><td colspan="2">Bloque 3397209 (Carpeta)</td></tr>
+                    <tr><td>.</td><td>2</td></tr><tr><td>..</td><td>0</td></tr><tr><td>(vacío)</td><td>-1</td></tr><tr><td>(vacío)</td><td>-1</td></tr>
+                </table>>];
+            block3397337 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightgreen">
+                    <tr><td colspan="2">Bloque 3397337 (Carpeta)</td></tr>
+                    <tr><td>home</td><td>3</td></tr><tr><td>(vacío)</td><td>-1</td></tr><tr><td>(vacío)</td><td>-1</td></tr><tr><td>(vacío)</td><td>-1</td></tr>
+                </table>>];
+            inode3 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 3</td></tr>
+            <tr><td>Nombre</td><td>home</td></tr>
+            <tr><td>Tipo</td><td>0</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3397273]</td></tr>
+        </table>>];
+    block3397273 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightgreen">
+                    <tr><td colspan="2">Bloque 3397273 (Carpeta)</td></tr>
+                    <tr><td>.</td><td>3</td></tr><tr><td>..</td><td>0</td></tr><tr><td>archivos</td><td>4</td></tr><tr><td>(vacío)</td><td>-1</td></tr>
+                </table>>];
+            inode4 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 4</td></tr>
+            <tr><td>Nombre</td><td>archivos</td></tr>
+            <tr><td>Tipo</td><td>0</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3397401]</td></tr>
+        </table>>];
+    block3397401 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightgreen">
+                    <tr><td colspan="2">Bloque 3397401 (Carpeta)</td></tr>
+                    <tr><td>.</td><td>4</td></tr><tr><td>..</td><td>3</td></tr><tr><td>user</td><td>5</td></tr><tr><td>carpeta1</td><td>8</td></tr>
+                </table>>];
+            inode5 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 5</td></tr>
+            <tr><td>Nombre</td><td>user</td></tr>
+            <tr><td>Tipo</td><td>0</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3397465]</td></tr>
+        </table>>];
+    block3397465 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightgreen">
+                    <tr><td colspan="2">Bloque 3397465 (Carpeta)</td></tr>
+                    <tr><td>.</td><td>5</td></tr><tr><td>..</td><td>4</td></tr><tr><td>docs</td><td>6</td></tr><tr><td>(vacío)</td><td>-1</td></tr>
+                </table>>];
+            inode6 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 6</td></tr>
+            <tr><td>Nombre</td><td>docs</td></tr>
+            <tr><td>Tipo</td><td>0</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3397529 3398105]</td></tr>
+        </table>>];
+    block3397529 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightgreen">
+                    <tr><td colspan="2">Bloque 3397529 (Carpeta)</td></tr>
+                    <tr><td>.</td><td>6</td></tr><tr><td>..</td><td>5</td></tr><tr><td>usac</td><td>7</td></tr><tr><td>Tarea.txt</td><td>13</td></tr>
+                </table>>];
+            inode7 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 7</td></tr>
+            <tr><td>Nombre</td><td>usac</td></tr>
+            <tr><td>Tipo</td><td>0</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3397593]</td></tr>
+        </table>>];
+    block3397593 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightgreen">
+                    <tr><td colspan="2">Bloque 3397593 (Carpeta)</td></tr>
+                    <tr><td>.</td><td>7</td></tr><tr><td>..</td><td>6</td></tr><tr><td>archivos</td><td>16</td></tr><tr><td>(vacío)</td><td>-1</td></tr>
+                </table>>];
+            inode16 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 16</td></tr>
+            <tr><td>Nombre</td><td>archivos</td></tr>
+            <tr><td>Tipo</td><td>0</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3399001]</td></tr>
+        </table>>];
+    block3399001 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightgreen">
+                    <tr><td colspan="2">Bloque 3399001 (Carpeta)</td></tr>
+                    <tr><td>.</td><td>16</td></tr><tr><td>..</td><td>7</td></tr><tr><td>proyectos</td><td>17</td></tr><tr><td>(vacío)</td><td>-1</td></tr>
+                </table>>];
+            inode17 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 17</td></tr>
+            <tr><td>Nombre</td><td>proyectos</td></tr>
+            <tr><td>Tipo</td><td>0</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3399065]</td></tr>
+        </table>>];
+    block3399065 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightgreen">
+                    <tr><td colspan="2">Bloque 3399065 (Carpeta)</td></tr>
+                    <tr><td>.</td><td>17</td></tr><tr><td>..</td><td>16</td></tr><tr><td>fase1</td><td>18</td></tr><tr><td>(vacío)</td><td>-1</td></tr>
+                </table>>];
+            inode18 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 18</td></tr>
+            <tr><td>Nombre</td><td>fase1</td></tr>
+            <tr><td>Tipo</td><td>0</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3399129]</td></tr>
+        </table>>];
+    block3399129 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightgreen">
+                    <tr><td colspan="2">Bloque 3399129 (Carpeta)</td></tr>
+                    <tr><td>.</td><td>18</td></tr><tr><td>..</td><td>17</td></tr><tr><td>entrada.txt</td><td>19</td></tr><tr><td>(vacío)</td><td>-1</td></tr>
+                </table>>];
+            inode19 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 19</td></tr>
+            <tr><td>Nombre</td><td>entrada.txt</td></tr>
+            <tr><td>Tipo</td><td>1</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[]</td></tr>
+        </table>>];
+    inode13 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 13</td></tr>
+            <tr><td>Nombre</td><td>Tarea.txt</td></tr>
+            <tr><td>Tipo</td><td>1</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3397977 3398041]</td></tr>
+        </table>>];
+    block3397977 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3397977 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>0123456789012345678901234567890123456789012345678901234567890123</td></tr>
+                </table>>];
+            block3398041 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3398041 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>45678901234</td></tr>
+                </table>>];
+            block3398105 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightgreen">
+                    <tr><td colspan="2">Bloque 3398105 (Carpeta)</td></tr>
+                    <tr><td>Tarea2.txt</td><td>14</td></tr><tr><td>Tarea3.txt</td><td>15</td></tr><tr><td>(vacío)</td><td>-1</td></tr><tr><td>(vacío)</td><td>-1</td></tr>
+                </table>>];
+            inode14 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 14</td></tr>
+            <tr><td>Nombre</td><td>Tarea2.txt</td></tr>
+            <tr><td>Tipo</td><td>1</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3398169 3398233 3398297 3398361 3398425 3398489 3398553 3398617 3398681 3398745 3398809 3398873]</td></tr>
+        </table>>];
+    block3398169 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3398169 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>0123456789012345678901234567890123456789012345678901234567890123</td></tr>
+                </table>>];
+            block3398233 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3398233 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>4567890123456789012345678901234567890123456789012345678901234567</td></tr>
+                </table>>];
+            block3398297 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3398297 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>8901234567890123456789012345678901234567890123456789012345678901</td></tr>
+                </table>>];
+            block3398361 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3398361 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>2345678901234567890123456789012345678901234567890123456789012345</td></tr>
+                </table>>];
+            block3398425 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3398425 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>6789012345678901234567890123456789012345678901234567890123456789</td></tr>
+                </table>>];
+            block3398489 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3398489 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>0123456789012345678901234567890123456789012345678901234567890123</td></tr>
+                </table>>];
+            block3398553 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3398553 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>4567890123456789012345678901234567890123456789012345678901234567</td></tr>
+                </table>>];
+            block3398617 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3398617 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>8901234567890123456789012345678901234567890123456789012345678901</td></tr>
+                </table>>];
+            block3398681 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3398681 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>2345678901234567890123456789012345678901234567890123456789012345</td></tr>
+                </table>>];
+            block3398745 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3398745 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>6789012345678901234567890123456789012345678901234567890123456789</td></tr>
+                </table>>];
+            block3398809 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3398809 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>0123456789012345678901234567890123456789012345678901234567890123</td></tr>
+                </table>>];
+            block3398873 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3398873 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>4567890123456789012345678901234567890123456789012345678901234567</td></tr>
+                </table>>];
+            inode15 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 15</td></tr>
+            <tr><td>Nombre</td><td>Tarea3.txt</td></tr>
+            <tr><td>Tipo</td><td>1</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3398937]</td></tr>
+        </table>>];
+    block3398937 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightyellow">
+                    <tr><td colspan="2">Bloque 3398937 (Archivo)</td></tr>
+                    <tr><td>Contenido</td><td>Prueba987111</td></tr>
+                </table>>];
+            inode8 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 8</td></tr>
+            <tr><td>Nombre</td><td>carpeta1</td></tr>
+            <tr><td>Tipo</td><td>0</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3397657]</td></tr>
+        </table>>];
+    block3397657 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightgreen">
+                    <tr><td colspan="2">Bloque 3397657 (Carpeta)</td></tr>
+                    <tr><td>.</td><td>8</td></tr><tr><td>..</td><td>4</td></tr><tr><td>carpeta2</td><td>9</td></tr><tr><td>(vacío)</td><td>-1</td></tr>
+                </table>>];
+            inode9 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 9</td></tr>
+            <tr><td>Nombre</td><td>carpeta2</td></tr>
+            <tr><td>Tipo</td><td>0</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3397721]</td></tr>
+        </table>>];
+    block3397721 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightgreen">
+                    <tr><td colspan="2">Bloque 3397721 (Carpeta)</td></tr>
+                    <tr><td>.</td><td>9</td></tr><tr><td>..</td><td>8</td></tr><tr><td>carpeta3</td><td>10</td></tr><tr><td>(vacío)</td><td>-1</td></tr>
+                </table>>];
+            inode10 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 10</td></tr>
+            <tr><td>Nombre</td><td>carpeta3</td></tr>
+            <tr><td>Tipo</td><td>0</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3397785]</td></tr>
+        </table>>];
+    block3397785 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightgreen">
+                    <tr><td colspan="2">Bloque 3397785 (Carpeta)</td></tr>
+                    <tr><td>.</td><td>10</td></tr><tr><td>..</td><td>9</td></tr><tr><td>carpeta4</td><td>11</td></tr><tr><td>(vacío)</td><td>-1</td></tr>
+                </table>>];
+            inode11 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 11</td></tr>
+            <tr><td>Nombre</td><td>carpeta4</td></tr>
+            <tr><td>Tipo</td><td>0</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3397849]</td></tr>
+        </table>>];
+    block3397849 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightgreen">
+                    <tr><td colspan="2">Bloque 3397849 (Carpeta)</td></tr>
+                    <tr><td>.</td><td>11</td></tr><tr><td>..</td><td>10</td></tr><tr><td>carpeta5</td><td>12</td></tr><tr><td>(vacío)</td><td>-1</td></tr>
+                </table>>];
+            inode12 [label=<
+        <table border="0" cellborder="1" cellspacing="0" bgcolor="lightblue">
+            <tr><td colspan="2">Inodo 12</td></tr>
+            <tr><td>Nombre</td><td>carpeta5</td></tr>
+            <tr><td>Tipo</td><td>0</td></tr>
+            <tr><td>Permisos</td><td>664</td></tr>
+            <tr><td>Bloques</td><td>[3397913]</td></tr>
+        </table>>];
+    block3397913 [label=<
+                <table border="0" cellborder="1" cellspacing="0" bgcolor="lightgreen">
+                    <tr><td colspan="2">Bloque 3397913 (Carpeta)</td></tr>
+                    <tr><td>.</td><td>12</td></tr><tr><td>..</td><td>11</td></tr><tr><td>(vacío)</td><td>-1</td></tr><tr><td>(vacío)</td><td>-1</td></tr>
+                </table>>];
+            inode0 -> block3396953;
+inode1 -> block3397017;
+inode1 -> block3397081;
+inode1 -> block3397145;
+block3396953 -> inode1;
+inode2 -> block3397209;
+block3397209 -> inode0;
+block3396953 -> inode2;
+inode0 -> block3397337;
+inode3 -> block3397273;
+block3397273 -> inode0;
+inode4 -> block3397401;
+block3397401 -> inode3;
+inode5 -> block3397465;
+block3397465 -> inode4;
+inode6 -> block3397529;
+block3397529 -> inode5;
+inode7 -> block3397593;
+block3397593 -> inode6;
+inode16 -> block3399001;
+block3399001 -> inode7;
+inode17 -> block3399065;
+block3399065 -> inode16;
+inode18 -> block3399129;
+block3399129 -> inode17;
+block3399129 -> inode19;
+block3399065 -> inode18;
+block3399001 -> inode17;
+block3397593 -> inode16;
+block3397529 -> inode7;
+inode13 -> block3397977;
+inode13 -> block3398041;
+block3397529 -> inode13;
+inode6 -> block3398105;
+inode14 -> block3398169;
+inode14 -> block3398233;
+inode14 -> block3398297;
+inode14 -> block3398361;
+inode14 -> block3398425;
+inode14 -> block3398489;
+inode14 -> block3398553;
+inode14 -> block3398617;
+inode14 -> block3398681;
+inode14 -> block3398745;
+inode14 -> block3398809;
+inode14 -> block3398873;
+block3398105 -> inode14;
+inode15 -> block3398937;
+block3398105 -> inode15;
+block3397465 -> inode6;
+block3397401 -> inode5;
+inode8 -> block3397657;
+block3397657 -> inode4;
+inode9 -> block3397721;
+block3397721 -> inode8;
+inode10 -> block3397785;
+block3397785 -> inode9;
+inode11 -> block3397849;
+block3397849 -> inode10;
+inode12 -> block3397913;
+block3397913 -> inode11;
+block3397849 -> inode12;
+block3397785 -> inode11;
+block3397721 -> inode10;
+block3397657 -> inode9;
+block3397401 -> inode8;
+block3397273 -> inode4;
+block3397337 -> inode3;
+}

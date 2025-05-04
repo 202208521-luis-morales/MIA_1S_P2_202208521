@@ -1,0 +1,23 @@
+digraph G {
+        node [shape=plaintext]
+        tabla [label=<
+            <table border="0" cellborder="1" cellspacing="0">
+                <tr><td colspan="2">Reporte de SUPERBLOQUE</td></tr>
+                <tr><td colspan="2">#SuperBloque en disco Disco1.mia</td></tr>
+                <tr><td>sb_inodos_count</td><td>20</td></tr>
+                <tr><td>sb_bloques_count</td><td>35</td></tr>
+                <tr><td>sb_inodos_free</td><td>36901</td></tr>
+                <tr><td>sb_bloques_free</td><td>110728</td></tr>
+                <tr><td>sb_date_ultimo_montaje</td><td>2025-04-03 09:28</td></tr>
+                <tr><td>sb_date_ultimo_desmontaje</td><td>2025-04-03 09:28</td></tr>
+                <tr><td>sb_montajes_count</td><td>0</td></tr>
+                <tr><td>sb_magic_num</td><td>0</td></tr>
+                <tr><td>sb_size_struct_inodo</td><td>88</td></tr>
+                <tr><td>sb_size_struct_bloque</td><td>64</td></tr>
+                <tr><td>sb_first_free_bit_inodos</td><td>20</td></tr>
+                <tr><td>sb_first_free_bit_bloques</td><td>3399193</td></tr>
+                <tr><td>sb_ap_bitmap_inodos</td><td>221</td></tr>
+                <tr><td>sb_ap_bitmap_bloques</td><td>37142</td></tr>
+                <tr><td>sb_ap_inodos</td><td>147905</td></tr>
+                <tr><td>sb_ap_bloques</td><td>3396953</td></tr>
+            </table>>] }

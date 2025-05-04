@@ -1,0 +1,104 @@
+Plan de pruebas
+Crear un disco con MKDISK:
+Ejemplo: mkdisk -size=10 -unit=M -path=disks/Disco1.mia
+Verificar que el disco se crea con el MBR inicializado.
+Crear particiones con FDISK:
+Primaria: fdisk -size=2 -unit=M -path=disks/Disco1.mia -name=Part1
+Extendida: fdisk -size=6 -type=E -unit=M -path=disks/Disco1.mia -name=PartE
+Lógica: fdisk -size=1 -type=L -unit=M -path=disks/Disco1.mia -name=PartL1
+Otra lógica: fdisk -size=2 -type=L -unit=M -path=disks/Disco1.mia -name=PartL2
+Exceder límite: fdisk -size=1 -type=P -unit=M -path=disks/Disco1.mia -name=Part2
+
+# Probar mounted
+mkdisk -size=10 -unit=M -path=disks/Disco1.mia
+fdisk -size=2 -unit=M -path=disks/Disco1.mia -name=Part1
+fdisk -size=3 -unit=M -path=disks/Disco1.mia -name=Part2
+mount -path=disks/Disco1.mia -name=Part1
+mount -path=disks/Disco1.mia -name=Part2
+mounted
+rmdisk -path=disks/Disco1.mia
+
+
+# Probar administracion de usuarios y grupos
+mkdisk -size=10 -unit=M -path=disks/Disco1.mia
+fdisk -size=2 -unit=M -path=disks/Disco1.mia -name=Part1
+mount -path=disks/Disco1.mia -name=Part1
+mkfs -id=211A
+
+login -user=root -pass=123 -id=531A
+mkgrp -name=admins
+mkusr -user=admin1 -grp=admins -pass=admin123
+logout
+
+login -user=admin1 -pass=admin123 -id=531A
+mkgrp -name=testgroup
+logout
+
+login -user=root -pass=123 -id=531A
+chgrp -user=admin1 -grp=root
+rmusr -user=admin1
+rmgrp -name=admins
+logout
+
+# Probar reporte de bloques
+mkdisk -size=10 -unit=M -path=disks/Disco1.mia
+fdisk -size=2 -unit=M -path=disks/Disco1.mia -name=Primaria1 -type=P
+mount -path=disks/Disco1.mia -name=Primaria1
+mkfs -id=531A -type=full
+login -user=root -pass=123 -id=531A
+mkdir -id=531A -path=/home
+mkfile -id=531A -path=/home/a.txt -cont="Hola, este es un archivo de prueba!"
+
+mkdir -id=531A -path=/docs
+rep -id=531A -path=output/report4.jpg -name=block
+
+# Probar reporte de bm bloques
+mkdisk -size=10 -unit=M -path=disks/Disco1.mia
+fdisk -size=2 -unit=M -path=disks/Disco1.mia -name=Primaria1 -type=P
+mount -path=disks/Disco1.mia -name=Primaria1
+mkfs -id=531A -type=full
+login -user=root -pass=123 -id=531A
+mkdir -id=531A -path=/home
+mkfile -id=531A -path=/home/a.txt -cont="Hola, este es un archivo de prueba!"
+mkdir -id=531A -path=/docs
+rep -id=531A -path=output/report6.txt -name=bm_block
+
+# Probar mkfile -cont
+# Crear el disco y la partición
+mkdisk -size=10 -unit=M -path=disks/Disco1.mia
+fdisk -size=2 -unit=M -path=disks/Disco1.mia -name=Part1 -type=P
+
+# Montar y formatear la partición
+mount -path=disks/Disco1.mia -name=Part1
+mkfs -id=531A -type=full
+
+# Iniciar sesión como root
+login -user=root -pass=123 -id=531A
+
+# Crear una carpeta y un archivo
+mkdir -id=531A -path=/home
+mkfile -id=531A -path=/home/a.txt -cont=contenido.txt
+
+# Leer el contenido del archivo
+cat -id=531A -file1=/home/a.txt
+
+
+
+El equivalente en ASCII decimal de "users.txt" es:
+
+rust
+Copy
+Edit
+u -> 117
+s -> 115
+e -> 101
+r -> 114
+s -> 115
+. ->  46
+t -> 116
+x -> 120
+t -> 116
+Por lo que el resultado en secuencia numérica es:
+
+117 115 101 114 115 46 116 120 116
+01110101 01110011 01100101 01110010 01110011 00101110 01110100 01111000 01110100
