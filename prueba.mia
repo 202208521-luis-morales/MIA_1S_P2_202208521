@@ -39,15 +39,15 @@ login -user=root -pass=123 -id=211a
 
 #******* CREACION DE CARPETAS *******
 
-mkdir -path=/calificacion/TEST
+mkdir -p  -path=/calificacion/TEST
 mkfile -path=/calificacion/TEST/nombre.txt -size=768
 mkfile -path=/calificacion/TEST/borrar.txt -size=768
-mkdir -path=/calificacion/TEST/BORRAME
+mkdir -p  -path=/calificacion/TEST/BORRAME
 mkfile -path=/calificacion/TEST/cambiar_nombre.txt -size=768
-mkdir -path=/calificacion/COPY_TEST
+mkdir -p  -path=/calificacion/COPY_TEST
 mkfile -path=/calificacion/COPY_TEST/moveme.txt -size=768
 
-mkdir -path=/calificacion/MOVE
+mkdir -p  -path=/calificacion/MOVE
 
 #******* REMOVE *******
 # Borrando archivo
@@ -74,3 +74,30 @@ chmod -path=/calificacion/TEST -ugo=777
 
 #******* LOGOUT *******
 logout
+
+# Versión aux:
+mkdisk -size=5 -unit=M -fit=WF -path="/home/luis/Downloads/MIA_1Proyecto2/disks/DiscoLab.mia"
+
+fdisk -size=1 -type=P -unit=M -fit=BF -name="Particion1" -path="/home/luis/Downloads/MIA_1Proyecto2/disks/DiscoLab.mia"
+
+mount -name="Particion1" -path="/home/luis/Downloads/MIA_1Proyecto2/disks/DiscoLab.mia"
+
+mkfs -id=211a -fs=3fs
+
+login -user=root -pass=123 -id=211a
+
+# Para pruebas
+Mkdisk -size=60 -unit=M -fit=FF -path=/home/luis/Downloads/MIA_1Proyecto2/disks/Disco1.mia
+
+fdisk -type=P -unit=b -name=Part1 -size=20971520 -path=/home/luis/Downloads/MIA_1Proyecto2/disks/Disco1.mia -fit=BF
+
+mount -path=/home/luis/Downloads/MIA_1Proyecto2/disks/Disco1.mia -name=Part1
+
+mkfs -type=full -id=211a -fs=3fs
+
+login -user=root -pass=123 -id=211a
+
+mkdir -p  -path=/calificacion/TEST
+mkfile -path=/calificacion/TEST/nombre.txt -size=768
+mkfile -path=/calificacion/TEST/borrar.txt -size=768
+remove -path=/calificacion/TEST/borrar.txt

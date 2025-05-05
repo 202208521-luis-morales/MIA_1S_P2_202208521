@@ -2,16 +2,36 @@ package structures
 
 import (
 	"backend/utils"
+	"fmt"
 	"strings"
 	"time"
 )
 
 // Crear users.txt en nuestro sistema de archivos
 func (sb *SuperBlock) CreateUsersFileExt3(path string, journauling_start int64) error {
-	// ----------- Creamos / -----------
-	// Crear Journal
+	fmt.Println("DEBUG: Iniciando CreateUsersFileExt3 - Path:", path, "Journal Start:", journauling_start)
 
-	// Creamos el inodo raíz
+	// ----------- Creamos / -----------
+	// Crear Journal inicial (vacío por ahora)
+	journal := &Journal{
+		J_count: sb.S_inodes_count,
+		J_content: Information{
+			I_operation: [10]byte{'m', 'k', 'd', 'i', 'r'},
+			I_path:      [32]byte{'/'},
+			I_content:   [64]byte{},
+			I_date:      float32(time.Now().Unix()),
+		},
+	}
+	fmt.Println("DEBUG: Serializing initial journal - Position:", journauling_start)
+	err := journal.Serialize(path, journauling_start)
+	if err != nil {
+		fmt.Println("DEBUG: Error serializing initial journal:", err)
+		return err
+	}
+	fmt.Println("DEBUG: Initial journal serialized successfully")
+
+	// Crear inodo raíz
+	fmt.Println("DEBUG: Creating root inode...")
 	rootInode := &Inode{
 		I_uid:   1,
 		I_gid:   1,
@@ -23,25 +43,34 @@ func (sb *SuperBlock) CreateUsersFileExt3(path string, journauling_start int64) 
 		I_type:  [1]byte{'0'},
 		I_perm:  [3]byte{'7', '7', '7'},
 	}
+	fmt.Println("DEBUG: Root inode created - I_block[0]:", rootInode.I_block[0], "I_type:", string(rootInode.I_type[:]), "I_perm:", string(rootInode.I_perm[:]))
 
 	// Serializar el inodo raíz
-	err := rootInode.Serialize(path, int64(sb.S_first_ino))
+	fmt.Println("DEBUG: Serializing root inode - Position:", sb.S_first_ino)
+	err = rootInode.Serialize(path, int64(sb.S_first_ino))
 	if err != nil {
+		fmt.Println("DEBUG: Error serializing root inode:", err)
 		return err
 	}
+	fmt.Println("DEBUG: Root inode serialized successfully")
 
 	// Actualizar el bitmap de inodos
+	fmt.Println("DEBUG: Updating inode bitmap for root - Index:", sb.S_inodes_count)
 	err = sb.UpdateBitmapInode(path, sb.S_inodes_count)
 	if err != nil {
+		fmt.Println("DEBUG: Error updating inode bitmap for root:", err)
 		return err
 	}
+	fmt.Println("DEBUG: Inode bitmap updated - S_inodes_count:", sb.S_inodes_count)
 
 	// Actualizar el superbloque
 	sb.S_inodes_count++
 	sb.S_free_inodes_count--
 	sb.S_first_ino += sb.S_inode_size
+	fmt.Println("DEBUG: Superblock updated - S_inodes_count:", sb.S_inodes_count, "S_free_inodes_count:", sb.S_free_inodes_count, "S_first_ino:", sb.S_first_ino)
 
-	// Creamos el bloque del Inodo Raíz
+	// Crear el bloque del inodo raíz
+	fmt.Println("DEBUG: Creating root block...")
 	rootBlock := &FolderBlock{
 		B_content: [4]FolderContent{
 			{B_name: [12]byte{'.'}, B_inodo: 0},
@@ -50,74 +79,96 @@ func (sb *SuperBlock) CreateUsersFileExt3(path string, journauling_start int64) 
 			{B_name: [12]byte{'-'}, B_inodo: -1},
 		},
 	}
+	fmt.Println("DEBUG: Root block created - Entry 0:", string(rootBlock.B_content[0].B_name[:]), "Inodo:", rootBlock.B_content[0].B_inodo)
 
-	// Actualizar el bitmap de bloques
-	err = sb.UpdateBitmapBlock(path)
-	if err != nil {
-		return err
-	}
+	// Actualizar I_block[0] del inodo raíz con la posición del bloque
+	rootInode.I_block[0] = sb.S_first_blo
+	fmt.Println("DEBUG: Updated root inode I_block[0] to:", rootInode.I_block[0])
 
 	// Serializar el bloque de carpeta raíz
+	fmt.Println("DEBUG: Serializing root block - Position:", sb.S_first_blo)
 	err = rootBlock.Serialize(path, int64(sb.S_first_blo))
 	if err != nil {
+		fmt.Println("DEBUG: Error serializing root block:", err)
 		return err
 	}
+	fmt.Println("DEBUG: Root block serialized successfully")
+
+	// Actualizar el bitmap de bloques
+	fmt.Println("DEBUG: Updating block bitmap for root...")
+	err = sb.UpdateBitmapBlock(path)
+	if err != nil {
+		fmt.Println("DEBUG: Error updating block bitmap for root:", err)
+		return err
+	}
+	fmt.Println("DEBUG: Block bitmap updated")
 
 	// Actualizar el superbloque
 	sb.S_blocks_count++
 	sb.S_free_blocks_count--
 	sb.S_first_blo += sb.S_block_size
+	fmt.Println("DEBUG: Superblock updated - S_blocks_count:", sb.S_blocks_count, "S_free_blocks_count:", sb.S_free_blocks_count, "S_first_blo:", sb.S_first_blo)
 
-	journal := &Journal{
-		J_count: sb.S_inodes_count,
-		J_content: Information{
-			I_operation: [10]byte{'m', 'k', 'd', 'i', 'r'},
-			I_path:      [32]byte{'/'},
-			I_content:   [64]byte{},
-			I_date:      float32(time.Now().Unix()),
-		},
-	}
-
-	// Serializar el journal
-	err = journal.Serialize(path, journauling_start)
+	// Re-serializar el inodo raíz con el bloque actualizado
+	fmt.Println("DEBUG: Re-serializing root inode - Position:", sb.S_first_ino-sb.S_inode_size)
+	err = rootInode.Serialize(path, int64(sb.S_first_ino-sb.S_inode_size))
 	if err != nil {
+		fmt.Println("DEBUG: Error re-serializing root inode:", err)
 		return err
 	}
+	fmt.Println("DEBUG: Root inode re-serialized successfully")
 
 	// ----------- Creamos /users.txt -----------
 	usersText := "1,G,root\n1,U,root,root,123\n"
+	fmt.Println("DEBUG: Creating users.txt with content:", usersText)
 
 	// Deserializar el inodo raíz
-	err = rootInode.Deserialize(path, int64(sb.S_inode_start+0)) // 0 porque es el inodo raíz
+	fmt.Println("DEBUG: Deserializing root inode - Position:", sb.S_first_ino-sb.S_inode_size)
+	err = rootInode.Deserialize(path, int64(sb.S_first_ino-sb.S_inode_size))
 	if err != nil {
+		fmt.Println("DEBUG: Error deserializing root inode:", err)
 		return err
 	}
+	fmt.Println("DEBUG: Root inode deserialized - I_block[0]:", rootInode.I_block[0])
 
-	// Actualizamos el inodo raíz
+	// Actualizar el inodo raíz (solo atime)
 	rootInode.I_atime = float32(time.Now().Unix())
+	fmt.Println("DEBUG: Updated root inode I_atime:", rootInode.I_atime)
 
 	// Serializar el inodo raíz
-	err = rootInode.Serialize(path, int64(sb.S_inode_start+0)) // 0 porque es el inodo raíz
+	fmt.Println("DEBUG: Serializing root inode - Position:", sb.S_first_ino-sb.S_inode_size)
+	err = rootInode.Serialize(path, int64(sb.S_first_ino-sb.S_inode_size))
 	if err != nil {
+		fmt.Println("DEBUG: Error serializing root inode:", err)
 		return err
 	}
+	fmt.Println("DEBUG: Root inode serialized successfully")
 
 	// Deserializar el bloque de carpeta raíz
-	err = rootBlock.Deserialize(path, int64(sb.S_block_start+0)) // 0 porque es el bloque de carpeta raíz
+	fmt.Println("DEBUG: Deserializing root block - Position:", rootInode.I_block[0])
+	err = rootBlock.Deserialize(path, int64(rootInode.I_block[0]))
 	if err != nil {
+		fmt.Println("DEBUG: Error deserializing root block:", err)
 		return err
 	}
+	fmt.Println("DEBUG: Root block deserialized - Entry 2 Inodo:", rootBlock.B_content[2].B_inodo)
 
-	// Actualizamos el bloque de carpeta raíz
-	rootBlock.B_content[2] = FolderContent{B_name: [12]byte{'u', 's', 'e', 'r', 's', '.', 't', 'x', 't'}, B_inodo: sb.S_inodes_count}
+	// Actualizar el bloque de carpeta raíz con users.txt
+	copy(rootBlock.B_content[2].B_name[:], "users.txt")
+	rootBlock.B_content[2].B_inodo = sb.S_inodes_count
+	fmt.Println("DEBUG: Updated root block - Entry 2: users.txt, Inodo:", rootBlock.B_content[2].B_inodo)
 
 	// Serializar el bloque de carpeta raíz
-	err = rootBlock.Serialize(path, int64(sb.S_block_start+0)) // 0 porque es el bloque de carpeta raíz
+	fmt.Println("DEBUG: Serializing root block - Position:", rootInode.I_block[0])
+	err = rootBlock.Serialize(path, int64(rootInode.I_block[0]))
 	if err != nil {
+		fmt.Println("DEBUG: Error serializing root block:", err)
 		return err
 	}
+	fmt.Println("DEBUG: Root block serialized successfully")
 
-	// Creamos el inodo users.txt
+	// Crear el inodo users.txt
+	fmt.Println("DEBUG: Creating users.txt inode...")
 	usersInode := &Inode{
 		I_uid:   1,
 		I_gid:   1,
@@ -129,25 +180,33 @@ func (sb *SuperBlock) CreateUsersFileExt3(path string, journauling_start int64) 
 		I_type:  [1]byte{'1'},
 		I_perm:  [3]byte{'7', '7', '7'},
 	}
+	fmt.Println("DEBUG: Users.txt inode created - I_size:", usersInode.I_size, "I_block[0]:", usersInode.I_block[0])
 
 	// Actualizar el bitmap de inodos
+	fmt.Println("DEBUG: Updating inode bitmap for users.txt - Index:", sb.S_inodes_count)
 	err = sb.UpdateBitmapInode(path, sb.S_inodes_count)
 	if err != nil {
+		fmt.Println("DEBUG: Error updating inode bitmap for users.txt:", err)
 		return err
 	}
+	fmt.Println("DEBUG: Inode bitmap updated")
 
 	// Serializar el inodo users.txt
+	fmt.Println("DEBUG: Serializing users.txt inode - Position:", sb.S_first_ino)
 	err = usersInode.Serialize(path, int64(sb.S_first_ino))
 	if err != nil {
+		fmt.Println("DEBUG: Error serializing users.txt inode:", err)
 		return err
 	}
+	fmt.Println("DEBUG: Users.txt inode serialized successfully")
 
-	// Actualizamos el superbloque
+	// Actualizar el superbloque
 	sb.S_inodes_count++
 	sb.S_free_inodes_count--
 	sb.S_first_ino += sb.S_inode_size
+	fmt.Println("DEBUG: Superblock updated - S_inodes_count:", sb.S_inodes_count, "S_free_inodes_count:", sb.S_free_inodes_count, "S_first_ino:", sb.S_first_ino)
 
-	// Crear Journal
+	// Crear Journal para users.txt
 	journalFile := &Journal{
 		J_count: sb.S_inodes_count,
 		J_content: Information{
@@ -157,38 +216,59 @@ func (sb *SuperBlock) CreateUsersFileExt3(path string, journauling_start int64) 
 			I_date:      float32(time.Now().Unix()),
 		},
 	}
-	// Copiamos el texto de usuarios en el journal
 	copy(journalFile.J_content.I_content[:], usersText)
-
-	// Serializar el journal
+	fmt.Println("DEBUG: Serializing journal for users.txt - Position:", journauling_start)
 	err = journalFile.Serialize(path, journauling_start)
 	if err != nil {
+		fmt.Println("DEBUG: Error serializing journal for users.txt:", err)
 		return err
 	}
+	fmt.Println("DEBUG: Journal for users.txt serialized successfully")
 
-	// Creamos el bloque de users.txt
+	// Crear el bloque de users.txt
+	fmt.Println("DEBUG: Creating users.txt block...")
 	usersBlock := &FileBlock{
 		B_content: [64]byte{},
 	}
-	// Copiamos el texto de usuarios en el bloque
 	copy(usersBlock.B_content[:], usersText)
+	fmt.Println("DEBUG: Users.txt block content:", string(usersBlock.B_content[:]))
 
 	// Serializar el bloque de users.txt
+	fmt.Println("DEBUG: Serializing users.txt block - Position:", sb.S_first_blo)
 	err = usersBlock.Serialize(path, int64(sb.S_first_blo))
 	if err != nil {
+		fmt.Println("DEBUG: Error serializing users.txt block:", err)
 		return err
 	}
+	fmt.Println("DEBUG: Users.txt block serialized successfully")
 
 	// Actualizar el bitmap de bloques
+	fmt.Println("DEBUG: Updating block bitmap for users.txt...")
 	err = sb.UpdateBitmapBlock(path)
 	if err != nil {
+		fmt.Println("DEBUG: Error updating block bitmap for users.txt:", err)
 		return err
 	}
+	fmt.Println("DEBUG: Block bitmap updated")
 
-	// Actualizamos el superbloque
+	// Actualizar el inodo users.txt con el bloque
+	usersInode.I_block[0] = sb.S_first_blo
+	fmt.Println("DEBUG: Updated users.txt inode I_block[0] to:", usersInode.I_block[0])
+
+	// Re-serializar el inodo users.txt
+	fmt.Println("DEBUG: Re-serializing users.txt inode - Position:", sb.S_first_ino-sb.S_inode_size)
+	err = usersInode.Serialize(path, int64(sb.S_first_ino-sb.S_inode_size))
+	if err != nil {
+		fmt.Println("DEBUG: Error re-serializing users.txt inode:", err)
+		return err
+	}
+	fmt.Println("DEBUG: Users.txt inode re-serialized successfully")
+
+	// Actualizar el superbloque
 	sb.S_blocks_count++
 	sb.S_free_blocks_count--
 	sb.S_first_blo += sb.S_block_size
+	fmt.Println("DEBUG: Superblock updated - S_blocks_count:", sb.S_blocks_count, "S_free_blocks_count:", sb.S_free_blocks_count, "S_first_blo:", sb.S_first_blo)
 
 	return nil
 }

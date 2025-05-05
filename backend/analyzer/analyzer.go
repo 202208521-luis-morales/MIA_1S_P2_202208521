@@ -55,6 +55,8 @@ func Analyzer(input string) (string, error) {
 		return commands.ParseCat(tokens[1:])
 	case "unmount":
 		return commands.ParseUnmount(tokens[1:])
+	case "remove":
+		return commands.ParseRemove(tokens[1:])
 	default:
 		return "", fmt.Errorf("comando desconocido: %s", tokens[0])
 	}
