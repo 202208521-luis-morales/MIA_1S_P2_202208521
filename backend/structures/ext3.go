@@ -31,7 +31,7 @@ func (sb *SuperBlock) CreateUsersFileExt3(path string, journauling_start int64) 
 	fmt.Println("DEBUG: Initial journal serialized successfully")
 
 	// Crear inodo raíz
-	fmt.Println("DEBUG: Creating root inode...")
+	fmt.Println("DEBUG: Creando root inode...")
 	rootInode := &Inode{
 		I_uid:   1,
 		I_gid:   1,
