@@ -101,3 +101,12 @@ mkdir -p  -path=/calificacion/TEST
 mkfile -path=/calificacion/TEST/nombre.txt -size=768
 mkfile -path=/calificacion/TEST/borrar.txt -size=768
 remove -path=/calificacion/TEST/borrar.txt
+
+Mkdisk -size=60 -unit=M -fit=FF -path=/home/luis/Downloads/MIA_1Proyecto2/disks/Disco1.mia
+fdisk -type=P -unit=b -name=Part1 -size=20971520 -path=/home/luis/Downloads/MIA_1Proyecto2/disks/Disco1.mia -fit=BF
+mount -path=/home/luis/Downloads/MIA_1Proyecto2/disks/Disco1.mia -name=Part1
+mkfs -type=full -id=211a -fs=3fs
+login -user=root -pass=123 -id=211a
+mkdir -p -path=/calificacion/TEST
+mkfile -path=/calificacion/TEST/archivo.txt -size=128
+edit -path=/calificacion/TEST/archivo.txt -contenido=/home/luis/Downloads/MIA_1Proyecto2/nuevo_contenido.txt
